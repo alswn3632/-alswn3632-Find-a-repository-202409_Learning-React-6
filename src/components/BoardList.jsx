@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { boardList } from '../data/data';
 import './board.css'
-import { Link } from 'react-router-dom';
 
 const BoardList = () => {
 
@@ -19,17 +19,20 @@ const BoardList = () => {
                 </thead>
                 <tbody>
                     {
-                        boardList.map(i =>(
-                            <tr>
-                                <td>{i.id}</td>
-                                <td><Link>{i.title}</Link></td>
-                                <td>{i.writer}</td>
-                                <td>{i.reg_date}</td>
+                        boardList.map(b =>(
+                            <tr key={b.id}>
+                                <td>{b.id}</td>
+                                <td><Link to={`/detail/${b.id}`}>{b.title}</Link></td>
+                                <td>{b.writer}</td>
+                                <td>{b.reg_date.substring(0,b.reg_date.indexOf('T'))}</td>
                             </tr>
                         ))
                     }
                 </tbody>
             </table>
+            <div className='btnBox'>
+                <Link to={'/create'} className='btn1'><button>작성</button></Link>
+            </div>
         </div>
     );
 };
